@@ -83,10 +83,7 @@ public class Rails extends Memcached {
         try {
             return super.get(context, new IRubyObject[] { key, notRaw });
         } catch (RaiseException e) {
-            if ("NotFound".equals(e.getException().getMetaClass().getBaseName())) {
-                return context.nil;
-            }
-            throw e;
+            return context.nil;
         }
     }
 

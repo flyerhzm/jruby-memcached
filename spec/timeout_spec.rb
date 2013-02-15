@@ -24,6 +24,23 @@ describe Memcached do
     @memcached.quit
   end
 
+  describe "Rails" do
+    before(:all) do
+      @timeout_rails = Memcached::Rails.new("127.0.0.1:11211", :timeout => 1, :exception_retry_limit => 0)
+    end
+
+    after(:all) do
+      @timeout_rails.quit
+    end
+
+    it "should return nil when got timeout" do
+      @memcached.set "a-key", "value"
+      while true
+        break if @timeout_rails.get("a-key").nil?
+      end
+    end
+  end
+
   it "should set timeout" do
     lambda {
       while true
