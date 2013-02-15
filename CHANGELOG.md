@@ -1,3 +1,20 @@
+## 0.5.2 (Feb 15, 2012)
+
+Bugfixes:
+
+  - do not throw error when get/read cache failed by Memcached::Rails
+
+## 0.5.1 (Nov 10, 2012)
+
+Bugfixes:
+
+  - ignore nil value in Memcached options
+
+Features:
+
+  - clean up java code
+  - separate slow timeout tests
+
 ## 0.5.0 (Aug 22, 2012)
 
 Bugfixes:
