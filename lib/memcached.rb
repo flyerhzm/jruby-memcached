@@ -1,6 +1,6 @@
 require 'java'
 require 'memcached/version'
-require File.join(File.dirname(__FILE__), '../target/spymemcached-ext-0.0.1.jar')
+require File.expand_path('../../target/spymemcached-ext-0.0.1.jar', __FILE__)
 require 'com/openfeint/memcached/memcached'
 
 class Memcached::Rails
