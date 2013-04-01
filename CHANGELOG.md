@@ -1,4 +1,10 @@
-## 0.5.2 (Feb 15, 2012)
+## 0.5.3 (Apr 1, 2013)
+
+Bugfixes:
+
+  - use the absolute path to the JAR file
+
+## 0.5.2 (Feb 15, 2013)
 
 Bugfixes:
 
