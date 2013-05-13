@@ -380,8 +380,8 @@ public class Memcached extends RubyObject {
     @JRubyMethod(name = "active?")
     public IRubyObject isActive(ThreadContext context) {
         Ruby ruby = context.getRuntime();
-        Collection address = client.getAvailableServers();
-        return ruby.newBoolean(!address.isEmpty());
+        Collection addresses = client.getAvailableServers();
+        return ruby.newBoolean(!addresses.isEmpty());
     }
 
     protected int getDefaultTTL() {
