@@ -231,5 +231,17 @@ describe Memcached do
         end
       end
     end
+
+    context "active?" do
+      it "should be true if has available servers" do
+        expect(@memcached.active?).to eq(true)
+      end
+
+      it "should be false if hasn't available servers" do
+        @memcached_bad = Memcached.new(["127.0.0.1:22121"])
+        expect(@memcached_bad.active?).to eq(false)
+        @memcached_bad.quit
+      end
+    end
   end
 end
