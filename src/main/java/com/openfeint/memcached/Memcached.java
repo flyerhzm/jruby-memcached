@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.Collection;
 
 @JRubyClass(name = "Memcached")
 public class Memcached extends RubyObject {
@@ -374,6 +375,13 @@ public class Memcached extends RubyObject {
         client.shutdown();
 
         return context.nil;
+    }
+
+    @JRubyMethod(name = "active?")
+    public IRubyObject isActive(ThreadContext context) {
+        Ruby ruby = context.getRuntime();
+        Collection address = client.getAvailableServers();
+        return ruby.newBoolean(!address.isEmpty());
     }
 
     protected int getDefaultTTL() {
