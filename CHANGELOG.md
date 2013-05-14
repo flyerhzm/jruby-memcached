@@ -1,3 +1,9 @@
+## 0.5.4 (May 14, 2013)
+
+Features:
+
+  - add Memcached#active? method
+
 ## 0.5.3 (Apr 1, 2013)
 
 Bugfixes:
