@@ -1,3 +1,9 @@
+## 0.5.5 (May 15, 2013)
+
+Bugfixes:
+
+  - forgot to update spymemcached-ext-0.0.1.jar before last release
+
 ## 0.5.4 (May 14, 2013)
 
 Features:
