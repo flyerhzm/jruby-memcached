@@ -98,8 +98,11 @@ public class Rails extends Memcached {
     public IRubyObject exist_p(ThreadContext context, IRubyObject[] args) {
         Ruby ruby = context.getRuntime();
         try {
-            super.get(context, args);
-            return ruby.getTrue();
+            IRubyObject value  = super.get(context, args);
+            if(value.isNil())
+                return ruby.getFalse();
+            else
+                return ruby.getTrue();
         } catch (RaiseException e) {
             return ruby.getFalse();
         }
