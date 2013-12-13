@@ -51,7 +51,7 @@ describe Memcached do
 
       it "should get missing" do
         @memcached.delete "key" rescue nil
-        expect { @memcached.get "key" }.to raise_error(Memcached::NotFound)
+        @memcached.get("key").should be_nil
       end
 
       context "multiget" do
@@ -77,8 +77,8 @@ describe Memcached do
       it "should set expiry" do
         @memcached.set "key", "value", 1
         @memcached.get("key").should == "value"
-        sleep 1
-        expect { @memcached.get("key") }.to raise_error(Memcached::NotFound)
+        sleep 2
+        @memcached.get("key").should be_nil
       end
     end
 
@@ -98,8 +98,8 @@ describe Memcached do
         @memcached.delete "key" rescue nil
         @memcached.add "key", "value", 1
         @memcached.get "key"
-        sleep 1
-        expect { @memcached.get "key" }.to raise_error(Memcached::NotFound)
+        sleep 2
+        @memcached.get("key").should be_nil
       end
     end
 
@@ -113,7 +113,7 @@ describe Memcached do
       it "should not replace with new key" do
         @memcached.delete "key" rescue nil
         expect { @memcached.replace "key", "value" }.to raise_error(Memcached::NotStored)
-        expect { @memcached.get "key" }.to raise_error(Memcached::NotFound)
+        @memcached.get("key").should be_nil
       end
     end
 
@@ -121,12 +121,12 @@ describe Memcached do
       it "should delete with existing key" do
         @memcached.set "key", "value"
         @memcached.delete "key"
-        expect { @memcached.get "key" }.to raise_error(Memcached::NotFound)
+        @memcached.get("key").should be_nil
       end
 
-      it "should not delete with new key" do
+      it "should no op with new key" do
         @memcached.delete "key" rescue nil
-        expect { @memcached.delete "key" }.to raise_error(Memcached::NotFound)
+        @memcached.delete("key").should be_nil
       end
     end
 
@@ -180,8 +180,8 @@ describe Memcached do
         @memcached.set "key1", "value2"
         @memcached.set "key2", "value2"
         @memcached.flush
-        expect { @memcached.get "key1" }.to raise_error(Memcached::NotFound)
-        expect { @memcached.get "key2" }.to raise_error(Memcached::NotFound)
+        @memcached.get("key1").should be_nil
+        @memcached.get("key2").should be_nil
       end
     end
 
@@ -213,7 +213,7 @@ describe Memcached do
         it "should delete with prefix_key" do
           @prefix_memcached.set "key", "value"
           @prefix_memcached.delete "key"
-          expect { @memcached.get("jrubykey") }.to raise_error(Memcached::NotFound)
+          @memcached.get("jrubykey").should be_nil
         end
 
         it "should multiget with prefix_key" do

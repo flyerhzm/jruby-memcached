@@ -230,7 +230,7 @@ public class Memcached extends RubyObject {
                 if (keys instanceof RubyString) {
                     Object ret = client.get(getFullKey(keys.toString()), transcoder);
                     if (ret == null) {
-                        throw Error.newNotFound(ruby, "not found");
+                        return context.nil;
                     }
                     IRubyObject value;
                     if (ret instanceof IRubyObject) {
@@ -311,7 +311,7 @@ public class Memcached extends RubyObject {
             try {
                 boolean result = client.delete(getFullKey(key.toString())).get();
                 if (!result) {
-                    throw Error.newNotFound(ruby, "not found");
+                    return context.nil;
                 }
                 return context.nil;
             } catch (RaiseException e) {
